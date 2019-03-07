@@ -31,7 +31,7 @@
 %% Assume the Self Weight of the Footing
 # name: Self_Weight
 # type: scalar
-0.1
+10
 
 %% Length_of_the_Footing in m
 # name: Length_of_the_Footing
@@ -57,3 +57,20 @@
 # name: Soil_Pressure
 # type: scalar
 120
+
+# name: Clear_Cover
+# type: scalar
+60
+
+# name: dia
+# type: scalar
+20
+
+# name: dia_saggingBM
+# type: scalar
+12
+
+# name: Position_where_SF_is_Zero
+# type: scalar
+3.55
+
