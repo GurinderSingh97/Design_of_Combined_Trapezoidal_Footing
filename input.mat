@@ -70,6 +70,10 @@
 # type: scalar
 12
 
+# name: dia_transverse
+# type: scalar
+16
+
 # name: Position_where_SF_is_Zero
 # type: scalar
 3.55

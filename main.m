@@ -214,3 +214,134 @@ printf("Area_of_one_steel = %d mm^2 \n", Area_of_one_steel2)
 Spacing2 = round((Bx10*1000*Area_of_one_steel2)/Area_of_steel2/100)*100;
 printf("Spacing = %d mm c/c \n", Spacing2)
 
+
+disp("\n")
+disp("Transverse Reinforcement for Column B")
+
+x11 = (Length_bwt_side_of_Footing_to_Center_of_Column_A + Center_to_Center_Spacing_bwt_two_Column) ;
+Bx11 = B1+(((B2-B1)/Length_of_Footing)*x11);
+a2 = 0.5*(Bx11-Width1_of_Column_B);
+Width_of_the_bending_strip_near_column_B = (Provided_Effective_Depth+(Width1_of_Column_B*1000)+Provided_Effective_Depth)/1000;
+printf("Width_of_the_bending_strip_near_column_B = %d m \n", Width_of_the_bending_strip_near_column_B)
+
+Average_Area_of_Bending_Strip_B = Bx11*Width_of_the_bending_strip_near_column_B;
+printf("Average_Area_of_Bending_Strip_B = %d m^2 \n", Average_Area_of_Bending_Strip_B)
+
+Net_Upward_Pressure_B = Load_on_Column_B/Average_Area_of_Bending_Strip_B;
+printf("Net_Upward_Pressure_B = %d KN/m^2 \n", Net_Upward_Pressure_B)
+
+Maximum_Bending_Moment_at_the_face_of_Column_B = (Net_Upward_Pressure_B/2)*(a2*a2);
+printf("Maximum_Bending_Moment_at_the_face_of_Column_B = %d KNm \n", Maximum_Bending_Moment_at_the_face_of_Column_B)
+
+Factored_Moment_at_face_of_the_Column_B = 1.5*Maximum_Bending_Moment_at_the_face_of_Column_B;
+printf("Factored_Moment_at_face_of_the_Column_B = %d KNm \n", Factored_Moment_at_face_of_the_Column_B)
+
+Effective_depth_required_B = sqrt((Factored_Moment_at_face_of_the_Column_B*1000000)/(Ru*1000));
+
+if(Provided_Effective_Depth>Effective_depth_required_B)
+Effective_depth_required_B = Provided_Effective_Depth;
+printf("Effective_depth_required_B = %d mm \n", Effective_depth_required_B)
+elseif(Provided_Effective_Depth<Effective_depth_required_B)
+Effective_depth_required_B = Effective_depth_required_B;
+printf("Effective_depth_required_B = %d mm \n", Effective_depth_required_B)
+endif
+
+Effective_depth_for_Transverse_Reinforcement = Provided_Effective_Depth - dia;
+printf("Effective_depth_for_Transverse_Reinforcement = %d mm \n", Effective_depth_for_Transverse_Reinforcement)
+
+Area_of_steel_B = 0.5*(Fck/Fy)*(1-sqrt(1-((4.6*Factored_Moment_at_face_of_the_Column_B*1000000)/(Fck*1000*Effective_depth_for_Transverse_Reinforcement*Effective_depth_for_Transverse_Reinforcement))))*1000*Effective_depth_for_Transverse_Reinforcement;
+
+Minimum_Area_of_steel_B = 0.0012*(1000*Overall_Depth);
+if(Area_of_steel_B>Minimum_Area_of_steel_B)
+Area_of_steel_B = Area_of_steel_B;
+printf("Area_of_Transverse_Reinforcement_at_Column_B = %d mm^2 \n", Area_of_steel_B)
+elseif(Area_of_steel_B<Minimum_Area_of_steel_B)
+Area_of_steel_B = Minimum_Area_of_steel_B;
+printf("Area_of_Transverse_Reinforcement_at_Column_B = %d mm^2 \n", Area_of_steel_B)
+endif
+
+
+Area_of_one_steel_B = (pi/4)*(dia_transverse*dia_transverse);
+printf("Area_of_one_bar = %d mm^2 \n", Area_of_one_steel_B)
+
+Spacing_B = round(((1000*Area_of_one_steel_B)/(Area_of_steel_B))/10)*10;
+printf("Spacing_between_bars = %d mm c/c \n", Spacing_B)
+
+
+disp("\n")
+disp("Transverse Reinforcement for Column A")
+
+x12 = (Length_bwt_side_of_Footing_to_Center_of_Column_A); 
+Bx12 = B1+(((B2-B1)/Length_of_Footing)*x12);
+a1 = 0.5*(Bx12-Width1_of_Column_A);
+Width_of_the_bending_strip_near_column_A = (Provided_Effective_Depth+(Width1_of_Column_A*1000)+Provided_Effective_Depth)/1000;
+printf("Width_of_the_bending_strip_near_column_A = %d m \n", Width_of_the_bending_strip_near_column_A)
+
+Average_Area_of_Bending_Strip_A = Bx12*Width_of_the_bending_strip_near_column_A;
+printf("Average_Area_of_Bending_Strip_A = %d m^2 \n", Average_Area_of_Bending_Strip_A)
+
+Net_Upward_Pressure_A = Load_on_Column_A/Average_Area_of_Bending_Strip_A;
+printf("Net_Upward_Pressure_A = %d KN/m^2 \n", Net_Upward_Pressure_A)
+
+Maximum_Bending_Moment_at_the_face_of_Column_A = (Net_Upward_Pressure_A/2)*(a1*a1);
+printf("Maximum_Bending_Moment_at_the_face_of_Column_A = %d KNm \n", Maximum_Bending_Moment_at_the_face_of_Column_A)
+
+Factored_Moment_at_face_of_the_Column_A = 1.5*Maximum_Bending_Moment_at_the_face_of_Column_A;
+printf("Factored_Moment_at_face_of_the_Column_A = %d KNm \n", Factored_Moment_at_face_of_the_Column_A)
+
+Effective_depth_required_A = Provided_Effective_Depth;
+printf("Effective_depth_required_A = %d mm \n", Effective_depth_required_A)
+
+Effective_depth_for_Transverse_Reinforcement = Provided_Effective_Depth - dia;
+printf("Effective_depth_for_Transverse_Reinforcement = %d mm \n", Effective_depth_for_Transverse_Reinforcement)
+
+Area_of_steel_A = 0.5*(Fck/Fy)*(1-sqrt(1-((4.6*Factored_Moment_at_face_of_the_Column_A*1000000)/(Fck*1000*Effective_depth_for_Transverse_Reinforcement*Effective_depth_for_Transverse_Reinforcement))))*1000*Effective_depth_for_Transverse_Reinforcement;
+
+Minimum_Area_of_steel_A = 0.0012*(1000*Overall_Depth);
+if(Area_of_steel_A>Minimum_Area_of_steel_A)
+Area_of_steel_A = Area_of_steel_A;
+printf("Area_of_Transverse_Reinforcement_at_Column_A = %d mm^2 \n", Area_of_steel_A)
+elseif(Area_of_steel_A<Minimum_Area_of_steel_A)
+Area_of_steel_A = Minimum_Area_of_steel_A;
+printf("Area_of_Transverse_Reinforcement_at_Column_A = %d mm^2 \n", Area_of_steel_A)
+endif
+
+Area_of_one_steel_A = (pi/4)*(dia_transverse*dia_transverse);
+printf("Area_of_one_bar = %d mm^2 \n", Area_of_one_steel_A)
+
+Spacing_A = round(((1000*Area_of_one_steel_A)/(Area_of_steel_A))/10)*10;
+printf("Spacing_between_bars = %d mm c/c \n", Spacing_A)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
